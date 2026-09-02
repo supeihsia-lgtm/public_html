@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8月运营月度报告 · HIGo旅行</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ============ RESET & BASE ============ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fd;
+            padding: 28px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dashboard {
+            max-width: 1440px;
+            width: 100%;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a1e33;
+            letter-spacing: -0.5px;
+        }
+        .header h1 small {
+            font-size: 15px;
+            font-weight: 400;
+            color: #5e6f8d;
+            margin-left: 14px;
+        }
+        .header .date-badge {
+            background: white;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a3a5c;
+            border: 1px solid #e2e9f2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        /* ============ KPI GRID ============ */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .kpi-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px 20px 16px;
+            border: 1px solid #edf2f9;
+            box-shadow: 0 4px 12px rgba(0, 20, 50, 0.03);
+            transition: 0.2s;
+        }
+        .kpi-card:hover {
+            border-color: #cbd9eb;
+        }
+        .kpi-card .kpi-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #5e6f8d;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .kpi-card .kpi-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a1e33;
+            letter-spacing: -0.5px;
+        }
+        .kpi-card .kpi-number small {
+            font-size: 15px;
+            font-weight: 400;
+            color: #5e6f8d;
+            margin-left: 4px;
+        }
+        .kpi-card .kpi-sub {
+            font-size: 12px;
+            color: #5e6f8d;
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .kpi-card.green { border-left: 4px solid #0d7c3f; background: #f8fefb; }
+        .kpi-card.orange { border-left: 4px solid #d9822b; background: #fefaf5; }
+        .kpi-card.red { border-left: 4px solid #bc4b4b; background: #fef8f8; }
+        .kpi-card.blue { border-left: 4px solid #2a6b9c; background: #f5faff; }
+        .kpi-number.green { color: #0d7c3f; }
+        .kpi-number.orange { color: #d9822b; }
+        .kpi-number.red { color: #bc4b4b; }
+        .kpi-number.blue { color: #2a6b9c; }
+
+        .badge-up { color: #0d7c3f; background: #e3f5ec; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+        .badge-down { color: #b13a3a; background: #fce9e9; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+        .badge-down-critical { color: #8a1a1a; background: #fcd9d9; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 700; }
+        .badge-neutral { color: #a67c1e; background: #fef4d9; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+        .badge-green { color: #0d7c3f; background: #e3f5ec; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+
+        /* ============ CARDS ============ */
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 20px 22px 22px;
+            border: 1px solid #edf2f9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            margin-bottom: 24px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a2c48;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #f0f4fa;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .card-title i { color: #2a6b9c; width: 22px; }
+        .card-title .title-badge {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+        .title-badge.green { background: #e3f5ec; color: #0d7c3f; }
+        .title-badge.orange { background: #fef4d9; color: #a67c1e; }
+        .title-badge.red { background: #fce9e9; color: #b13a3a; }
+        .title-badge.blue { background: #e3ecf5; color: #1a5c8c; }
+        .title-badge.purple { background: #ede7f6; color: #5e3a8c; }
+
+        /* ============ TABLES ============ */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 8px 6px 8px 0;
+            font-weight: 600;
+            color: #3d4f6a;
+            border-bottom: 1px solid #eaeef4;
+            font-size: 12px;
+        }
+        .data-table td {
+            padding: 9px 6px 9px 0;
+            border-bottom: 1px solid #f2f6fc;
+            color: #1d2d44;
+            font-size: 13px;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .highlight-green { color: #0d7c3f; font-weight: 600; }
+        .data-table .highlight-red { color: #b13a3a; font-weight: 600; }
+        .data-table .highlight-red-critical { color: #8a1a1a; font-weight: 700; background: #fcd9d9; padding: 0 6px; border-radius: 4px; }
+        .data-table .text-center { text-align: center; }
+        .data-table .text-right { text-align: right; }
+
+        .vs-good { background: #e3f5ec; color: #0d7c3f; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+        .vs-bad { background: #fce9e9; color: #b13a3a; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+        .vs-bad-critical { background: #fcd9d9; color: #8a1a1a; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+        .vs-neutral { background: #fef4d9; color: #a67c1e; padding: 0 10px; border-radius: 30px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+
+        /* ============ ROW LAYOUT ============ */
+        .row-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .row-three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+
+        /* ============ ALERT BOXES ============ */
+        .alert-box { background: #fcf2f2; border-left: 4px solid #bc4b4b; padding: 14px 18px; border-radius: 10px; margin-top: 14px; }
+        .success-box { background: #eaf7f0; border-left: 4px solid #0d7c3f; padding: 14px 18px; border-radius: 10px; margin-top: 14px; }
+        .info-box { background: #f0f6fe; border-left: 4px solid #1a5c8c; padding: 14px 18px; border-radius: 10px; margin-top: 14px; }
+        .conclusion-box { background: #f0f6fe; border-radius: 12px; padding: 16px 20px; margin-top: 20px; border-left: 4px solid #1a5c8c; font-size: 14px; color: #0b2a47; font-weight: 500; }
+        .conclusion-box .danger-text { color: #8a1a1a; font-weight: 700; }
+        .conclusion-box .green-text { color: #0d7c3f; font-weight: 700; }
+
+        /* ============ FLOW SPLIT ============ */
+        .flow-split { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 6px 0; }
+        .flow-item { background: #f8faff; border-radius: 12px; padding: 12px 14px; text-align: center; }
+        .flow-item .num { font-size: 24px; font-weight: 700; }
+        .flow-item .lbl { font-size: 11px; color: #5e6f8d; }
+        .flow-item.paid { border-top: 3px solid #2a6b9c; }
+        .flow-item.free { border-top: 3px solid #0d7c3f; background: #f0faf5; }
+        .flow-item.total { border-top: 3px solid #a67c1e; }
+
+        /* ============ DESTINATION CARDS ============ */
+        .dest-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 8px; }
+        .dest-card { background: #f8faff; border-radius: 14px; padding: 16px 18px; border: 1px solid #eaeef4; text-align: center; }
+        .dest-card .dest-name { font-weight: 700; font-size: 16px; color: #1a2c48; }
+        .dest-card .dest-name i { margin-right: 6px; }
+        .dest-card .dest-number { font-size: 26px; font-weight: 700; margin: 6px 0 2px; }
+        .dest-card .dest-label { font-size: 11px; color: #5e6f8d; }
+        .dest-card .dest-roi { font-size: 14px; font-weight: 600; margin-top: 4px; }
+        .dest-card.roi-high { border-top: 4px solid #0d7c3f; }
+        .dest-card.roi-mid { border-top: 4px solid #d9822b; }
+        .dest-card.roi-low { border-top: 4px solid #bc4b4b; }
+        .dest-card.roi-zero { border-top: 4px solid #2a6b9c; }
+
+        /* ============ PLAN GRID ============ */
+        .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 8px; }
+        .plan-item { background: #f8faff; border-radius: 14px; padding: 18px 20px; border: 1px solid #eaeef4; border-left: 5px solid #2a6b9c; }
+        .plan-item.priority-s { border-left-color: #bc4b4b; background: #fef8f8; }
+        .plan-item.priority-a { border-left-color: #d9822b; background: #fefaf5; }
+        .plan-item.priority-b { border-left-color: #0d7c3f; background: #f8fefb; }
+        .plan-item.priority-c { border-left-color: #1a5c8c; background: #f5faff; }
+        .plan-item .plan-title { font-weight: 700; font-size: 15px; color: #1a2c48; display: flex; align-items: center; gap: 8px; }
+        .plan-item .plan-title .badge { font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 30px; }
+        .badge.s { background: #fcd9d9; color: #8a1a1a; }
+        .badge.a { background: #fef4d9; color: #a67c1e; }
+        .badge.b { background: #e3f5ec; color: #0d7c3f; }
+        .badge.c { background: #e3ecf5; color: #1a5c8c; }
+        .plan-item .plan-detail { font-size: 13px; color: #3d4f6a; margin-top: 8px; line-height: 1.6; }
+        .plan-item .plan-detail ul { padding-left: 18px; margin-top: 4px; }
+        .plan-item .plan-detail ul li { margin-bottom: 2px; }
+        .plan-item .plan-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 12px; color: #5e6f8d; border-top: 1px solid #eaeef4; padding-top: 10px; }
+        .plan-item .plan-meta span { display: flex; align-items: center; gap: 4px; }
+        .plan-item .plan-meta .label { font-weight: 600; color: #1a2c48; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .row-two { grid-template-columns: 1fr; }
+            .row-three { grid-template-columns: 1fr 1fr; }
+            .dest-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .plan-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .row-three { grid-template-columns: 1fr; }
+            .dest-grid { grid-template-columns: 1fr 1fr; }
+            .flow-split { grid-template-columns: 1fr; }
+            .header h1 { font-size: 20px; }
+            .header h1 small { font-size: 12px; display: block; margin-left: 0; margin-top: 4px; }
+            .plan-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============ MISC ============ */
+        .mt-2 { margin-top: 12px; }
+        .mb-2 { margin-bottom: 12px; }
+        .text-small { font-size: 12px; color: #5e6f8d; }
+        .text-muted { color: #5e6f8d; }
+        .fw-700 { font-weight: 700; }
+        .flex-between { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .gap-8 { gap: 8px; }
+        .highlight-bar { background: #f7faff; padding: 10px 16px; border-radius: 10px; font-size: 13px; margin-top: 10px; }
+        .footer { text-align: right; font-size: 12px; color: #8a9bb5; border-top: 1px solid #e2e9f2; padding-top: 18px; margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+
+        <!-- ============================================================ -->
+        <!-- HEADER -->
+        <!-- ============================================================ -->
+        <div class="header">
+            <h1>
+                📊 8月运营月度报告
+                <small>富国岛包机专线 · 投入产出 &amp; 大盘对标</small>
+            </h1>
+            <span class="date-badge"><i class="far fa-calendar-alt"></i> 数据截止 2026.8.31</span>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- KPI 总盘 (8月) -->
+        <!-- ============================================================ -->
+        <div class="kpi-grid">
+            <div class="kpi-card green">
+                <div class="kpi-label"><i class="fas fa-coins" style="color:#0d7c3f;"></i> 总广告消耗</div>
+                <div class="kpi-number green">¥49,889</div>
+                <div class="kpi-sub">富国岛 ¥34,994 · 马尔代夫 ¥5,951</div>
+            </div>
+            <div class="kpi-card blue">
+                <div class="kpi-label"><i class="fas fa-users" style="color:#2a6b9c;"></i> 总进线 / 开口</div>
+                <div class="kpi-number blue">4,077 <small>进</small> / 3,195 <small>开</small></div>
+                <div class="kpi-sub">付费开口 2,037 · 自然开口 1,158</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-label"><i class="fas fa-message" style="color:#0d7c3f;"></i> 留资数 · 留资率</div>
+                <div class="kpi-number green">1,306 <small>留资</small></div>
+                <div class="kpi-sub">留资率 <strong>64.11%</strong> <span class="badge-up">↑ 较7月 +2.88pp</span></div>
+            </div>
+            <div class="kpi-card orange">
+                <div class="kpi-label"><i class="fas fa-ticket-alt" style="color:#d9822b;"></i> 订单 · 收客</div>
+                <div class="kpi-number orange">56 <small>订单</small> / 157 <small>收客</small></div>
+                <div class="kpi-sub">核销率 1.75% · 人数核销 4.91%</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-label"><i class="fas fa-chart-line" style="color:#0d7c3f;"></i> 8月总毛利</div>
+                <div class="kpi-number green">¥109,776</div>
+                <div class="kpi-sub">富国岛 ¥52,283 · 中亚 ¥16,900</div>
+            </div>
+            <div class="kpi-card blue">
+                <div class="kpi-label"><i class="fas fa-bullseye" style="color:#2a6b9c;"></i> 整体 ROI</div>
+                <div class="kpi-number blue">2.20 <small>x</small></div>
+                <div class="kpi-sub">广告费 ¥49,889 → 毛利 ¥109,776</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 7月 vs 8月 核心指标对比 -->
+        <!-- ============================================================ -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-chart-line"></i> 7月 vs 8月 核心数据对比 <span class="title-badge orange">增长点与落后点</span></div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>指标</th><th>7月</th><th>8月</th><th>变化</th><th>评价</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>广告消耗</strong></td>
+                        <td>¥59,486</td>
+                        <td>¥49,889</td>
+                        <td><span class="badge-down">↓ 16.1%</span></td>
+                        <td><span class="vs-neutral">预算收缩</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总进线</strong></td>
+                        <td>4,424</td>
+                        <td>4,077</td>
+                        <td><span class="badge-down">↓ 7.8%</span></td>
+                        <td><span class="vs-neutral">小幅下滑</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总开口</strong></td>
+                        <td>3,224</td>
+                        <td>3,195</td>
+                        <td><span class="badge-down">↓ 0.9%</span></td>
+                        <td><span class="vs-neutral">基本持平</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总留资</strong></td>
+                        <td>1,249</td>
+                        <td>1,306</td>
+                        <td><span class="badge-up">↑ 4.6%</span></td>
+                        <td><span class="vs-good">✅ 增长点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>留资率</strong></td>
+                        <td>61.23%</td>
+                        <td>64.11%</td>
+                        <td><span class="badge-up">↑ 2.88pp</span></td>
+                        <td><span class="vs-good">✅ 增长点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总订单</strong></td>
+                        <td>71</td>
+                        <td>56</td>
+                        <td><span class="badge-down-critical">↓ 21.1%</span></td>
+                        <td><span class="vs-bad-critical">🔴 落后点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总收客</strong></td>
+                        <td>287</td>
+                        <td>157</td>
+                        <td><span class="badge-down-critical">↓ 45.3%</span></td>
+                        <td><span class="vs-bad-critical">🔴 落后点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>核销率 (订单)</strong></td>
+                        <td>2.20%</td>
+                        <td>1.75%</td>
+                        <td><span class="badge-down">↓ 0.45pp</span></td>
+                        <td><span class="vs-bad">⚠️ 落后点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>人数核销率</strong></td>
+                        <td>8.90%</td>
+                        <td>4.91%</td>
+                        <td><span class="badge-down-critical">↓ 3.99pp</span></td>
+                        <td><span class="vs-bad-critical">🔴 落后点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>总毛利</strong></td>
+                        <td>¥165,671</td>
+                        <td>¥109,776</td>
+                        <td><span class="badge-down-critical">↓ 33.7%</span></td>
+                        <td><span class="vs-bad-critical">🔴 落后点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>整体 ROI</strong></td>
+                        <td>2.79x</td>
+                        <td>2.20x</td>
+                        <td><span class="badge-down">↓ 0.59x</span></td>
+                        <td><span class="vs-bad">⚠️ 落后点</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="info-box" style="margin-top:12px;">
+                <i class="fas fa-bullhorn" style="color:#1a5c8c;"></i>
+                <strong>核心发现：</strong> 8月在广告消耗减少 16.1% 的情况下，留资数逆势增长 4.6%，留资率提升 2.88 个百分点，说明流量质量与承接能力有所改善。
+                <span style="color:#8a1a1a; font-weight:700;">但订单转化与毛利出现大幅下滑（订单-21.1%，毛利-33.7%），</span> 销售端从留资到成交的转化效率亟待提升。
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 流量漏斗 + 成本与大盘对标 -->
+        <!-- ============================================================ -->
+        <div class="row-two">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-funnel-dollar"></i> 流量转化漏斗 <span class="title-badge blue">8月全量</span></div>
+                <div style="display:flex; flex-direction:column; gap:6px; font-size:14px; padding:4px 0;">
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0;">
+                        <span><i class="fas fa-door-open" style="color:#2a6b9c;"></i> 总进线</span>
+                        <span><strong>4,077</strong> <span class="text-small">(100%)</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0; padding-left:20px;">
+                        <span><i class="fas fa-arrow-right" style="color:#5e6f8d;"></i> 付费进线</span>
+                        <span><strong>2,446</strong> <span class="text-small">(60.0%)</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0; padding-left:20px;">
+                        <span><i class="fas fa-leaf" style="color:#0d7c3f;"></i> 自然进线</span>
+                        <span><strong>1,631</strong> <span class="text-small">(40.0%)</span> <span class="badge-up">🆓 0成本</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0;">
+                        <span><i class="fas fa-comment" style="color:#d9822b;"></i> 总开口</span>
+                        <span><strong>3,195</strong> <span class="text-small">(78.4%)</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0; padding-left:20px;">
+                        <span><i class="fas fa-arrow-right" style="color:#5e6f8d;"></i> 付费开口</span>
+                        <span><strong>2,037</strong> <span class="text-small">(63.8%)</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0; padding-left:20px;">
+                        <span><i class="fas fa-leaf" style="color:#0d7c3f;"></i> 自然开口</span>
+                        <span><strong>1,158</strong> <span class="text-small">(36.2%)</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0;">
+                        <span><i class="fas fa-file-signature" style="color:#1a5c8c;"></i> 总留资</span>
+                        <span><strong>1,306</strong> <span class="text-small">(留资率 64.11%)</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f0f4fa; padding:8px 0;">
+                        <span><i class="fas fa-ticket-alt" style="color:#d9822b;"></i> 总订单</span>
+                        <span><strong>56</strong> <span class="text-small">(核销率 1.75%)</span></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding:8px 0;">
+                        <span><i class="fas fa-user-friends" style="color:#0d7c3f;"></i> 总收客</span>
+                        <span><strong>157</strong> <span class="text-small">(人数核销 4.91%)</span></span>
+                    </div>
+                </div>
+                <div class="success-box" style="margin-top:12px;">
+                    <i class="fas fa-check-circle" style="color:#0d7c3f;"></i>
+                    <strong>自然进线占比 40.0%</strong> — 1,631 条免费进线，按付费进线成本约 ¥20.4 计算，<strong>节省广告费约 ¥33,272</strong>。
+                    <div style="font-size:12px; margin-top:4px; color:#5e6f8d;">来源：UGC、口碑、搜索、KOS自然流</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-rocket" style="color:#0d7c3f;"></i> 成本与大盘对标 <span class="title-badge green">碾压大盘</span></div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>指标</th><th>我司 (8月)</th><th>大盘 (小红书 8月)</th><th>对标</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CTR (越南)</strong></td>
+                            <td class="highlight-green">8.2% ~ 9.5%</td>
+                            <td>7.53%~10.53%</td>
+                            <td><span class="vs-good">✅ 达标</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CPC</strong></td>
+                            <td class="highlight-green">≈¥0.70</td>
+                            <td>¥1.92~2.68</td>
+                            <td><span class="vs-good">✅ 碾压</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>进线成本</strong></td>
+                            <td class="highlight-green">≈¥20.4</td>
+                            <td>¥59.52~83.20</td>
+                            <td><span class="vs-good">✅ 碾压</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>开口成本</strong></td>
+                            <td class="highlight-green">≈¥24.5</td>
+                            <td>¥74.57~104.23</td>
+                            <td><span class="vs-good">✅ 碾压</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>留资成本</strong></td>
+                            <td class="highlight-green">≈¥38.2</td>
+                            <td>¥108.10~151.09</td>
+                            <td><span class="vs-good">✅ 碾压</span></td>
+                        </tr>
+                        <tr style="background:#fef8f8;">
+                            <td><strong>留资率</strong></td>
+                            <td class="highlight-red"><strong>64.11%</strong></td>
+                            <td><strong>~80%</strong></td>
+                            <td><span class="vs-bad-critical">🔴 低 15.9pp</span></td>
+                        </tr>
+                        <tr style="background:#fef8f8;">
+                            <td><strong>核销率 (订单)</strong></td>
+                            <td class="highlight-red"><strong>1.75%</strong></td>
+                            <td>—</td>
+                            <td><span class="vs-bad">🔴 持续低位</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="info-box" style="margin-top:12px;">
+                    <i class="fas fa-bullhorn" style="color:#1a5c8c;"></i>
+                    <strong>核心结论：</strong> 成本端全面碾压大盘，但留资率低于大盘 15.9 个百分点，核销率仅 1.75%，<span style="color:#8a1a1a; font-weight:700;">承接转化仍是最大短板。</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 分目的地投入产出比 (核心) -->
+        <!-- ============================================================ -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-map-pin"></i> 分目的地 · 投入产出比 <span class="title-badge blue">ROI 拆解</span></div>
+
+            <div class="dest-grid">
+                <!-- 富国岛 -->
+                <div class="dest-card roi-high">
+                    <div class="dest-name"><i class="fas fa-umbrella-beach" style="color:#2a6b9c;"></i> 富国岛</div>
+                    <div class="dest-number" style="color:#2a6b9c;">¥52,283</div>
+                    <div class="dest-label">毛利</div>
+                    <div style="margin:4px 0; font-size:13px; color:#1d2d44;">广告费 ¥34,994 · 进线 3,195</div>
+                    <div class="dest-roi" style="color:#0d7c3f;">ROI = 1.49 <small style="font-weight:400; color:#5e6f8d;">x</small></div>
+                    <div style="font-size:11px; color:#5e6f8d; margin-top:2px;">订单 25 · 收客 67 · 进线成本 ¥10.95</div>
+                    <div style="margin-top:4px;"><span class="badge-green">基本盘</span></div>
+                </div>
+
+                <!-- 斯里兰卡 -->
+                <div class="dest-card roi-high">
+                    <div class="dest-name"><i class="fas fa-landmark" style="color:#d9822b;"></i> 斯里兰卡</div>
+                    <div class="dest-number" style="color:#d9822b;">¥13,000</div>
+                    <div class="dest-label">毛利</div>
+                    <div style="margin:4px 0; font-size:13px; color:#1d2d44;">广告费 ¥2,131 · 进线 182</div>
+                    <div class="dest-roi" style="color:#0d7c3f;">ROI = 6.10 <small style="font-weight:400; color:#5e6f8d;">x</small></div>
+                    <div style="font-size:11px; color:#5e6f8d; margin-top:2px;">订单 4 · 收客 17 · 进线成本 ¥11.71</div>
+                    <div style="margin-top:4px;"><span class="badge-up">🌟 ROI 极高</span></div>
+                </div>
+
+                <!-- 马尔代夫 -->
+                <div class="dest-card roi-mid">
+                    <div class="dest-name"><i class="fas fa-water" style="color:#1a5c8c;"></i> 马尔代夫</div>
+                    <div class="dest-number" style="color:#1a5c8c;">¥9,713</div>
+                    <div class="dest-label">毛利</div>
+                    <div style="margin:4px 0; font-size:13px; color:#1d2d44;">广告费 ¥5,951 · 进线 557</div>
+                    <div class="dest-roi" style="color:#0d7c3f;">ROI = 1.63 <small style="font-weight:400; color:#5e6f8d;">x</small></div>
+                    <div style="font-size:11px; color:#5e6f8d; margin-top:2px;">订单 8 · 收客 16 · 进线成本 ¥10.68</div>
+                    <div style="margin-top:4px;"><span class="badge-neutral">稳定</span></div>
+                </div>
+
+                <!-- 中亚 -->
+                <div class="dest-card roi-high">
+                    <div class="dest-name"><i class="fas fa-mountain" style="color:#a67c1e;"></i> 中亚</div>
+                    <div class="dest-number" style="color:#a67c1e;">¥16,900</div>
+                    <div class="dest-label">毛利</div>
+                    <div style="margin:4px 0; font-size:13px; color:#1d2d44;">广告费 ¥6,757 · 进线 487</div>
+                    <div class="dest-roi" style="color:#0d7c3f;">ROI = 2.50 <small style="font-weight:400; color:#5e6f8d;">x</small></div>
+                    <div style="font-size:11px; color:#5e6f8d; margin-top:2px;">订单 8 · 收客 24 · 进线成本 ¥13.87</div>
+                    <div style="margin-top:4px;"><span class="badge-green">🏆 ROI 最高 (除格鲁吉亚)</span></div>
+                </div>
+
+                <!-- 格鲁吉亚 -->
+                <div class="dest-card roi-mid">
+                    <div class="dest-name"><i class="fas fa-church" style="color:#8a6d3b;"></i> 格鲁吉亚</div>
+                    <div class="dest-number" style="color:#8a6d3b;">¥5,300</div>
+                    <div class="dest-label">毛利</div>
+                    <div style="margin:4px 0; font-size:13px; color:#1d2d44;">广告费 ¥56 · 进线 未知</div>
+                    <div class="dest-roi" style="color:#0d7c3f;">ROI = 94.6 <small style="font-weight:400; color:#5e6f8d;">x</small></div>
+                    <div style="font-size:11px; color:#5e6f8d; margin-top:2px;">订单 ？ · 收客 ？</div>
+                    <div style="margin-top:4px;"><span class="badge-up">⚡ 测试爆发</span></div>
+                </div>
+            </div>
+
+            <!-- 详细表格 -->
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table class="data-table" style="font-size:12.5px;">
+                    <thead>
+                        <tr>
+                            <th>目的地</th>
+                            <th class="text-right">广告费</th>
+                            <th class="text-right">进线</th>
+                            <th class="text-right">订单</th>
+                            <th class="text-right">收客</th>
+                            <th class="text-right">毛利</th>
+                            <th class="text-right">ROI</th>
+                            <th class="text-right">进线成本</th>
+                            <th>流量属性</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>富国岛</strong></td>
+                            <td class="text-right">¥34,994</td>
+                            <td class="text-right">3,195</td>
+                            <td class="text-right">25</td>
+                            <td class="text-right">67</td>
+                            <td class="text-right">¥52,283</td>
+                            <td class="text-right highlight-green">1.49x</td>
+                            <td class="text-right">¥10.95</td>
+                            <td><span class="badge-neutral">付费为主</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>斯里兰卡</strong></td>
+                            <td class="text-right">¥2,131</td>
+                            <td class="text-right">182</td>
+                            <td class="text-right">4</td>
+                            <td class="text-right">17</td>
+                            <td class="text-right">¥13,000</td>
+                            <td class="text-right highlight-green">6.10x</td>
+                            <td class="text-right">¥11.71</td>
+                            <td><span class="badge-up">付费 · 高转化</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>马尔代夫</strong></td>
+                            <td class="text-right">¥5,951</td>
+                            <td class="text-right">557</td>
+                            <td class="text-right">8</td>
+                            <td class="text-right">16</td>
+                            <td class="text-right">¥9,713</td>
+                            <td class="text-right highlight-green">1.63x</td>
+                            <td class="text-right">¥10.68</td>
+                            <td><span class="badge-green">付费 · 低成本</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>中亚</strong></td>
+                            <td class="text-right">¥6,757</td>
+                            <td class="text-right">487</td>
+                            <td class="text-right">8</td>
+                            <td class="text-right">24</td>
+                            <td class="text-right">¥16,900</td>
+                            <td class="text-right highlight-green">2.50x</td>
+                            <td class="text-right">¥13.87</td>
+                            <td><span class="badge-green">付费 · ROI高</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>格鲁吉亚</strong></td>
+                            <td class="text-right">¥56</td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">¥5,300</td>
+                            <td class="text-right highlight-green">94.6x</td>
+                            <td class="text-right">—</td>
+                            <td><span class="badge-neutral">测试中</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>其他 (泰/土/帕劳)</strong></td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">¥12,580</td>
+                            <td class="text-right">—</td>
+                            <td class="text-right">—</td>
+                            <td><span class="badge-neutral">自然/测试</span></td>
+                        </tr>
+                        <tr style="font-weight:700; background:#f7faff;">
+                            <td><strong>合计</strong></td>
+                            <td class="text-right">¥49,889</td>
+                            <td class="text-right">4,077</td>
+                            <td class="text-right">56</td>
+                            <td class="text-right">157</td>
+                            <td class="text-right">¥109,776</td>
+                            <td class="text-right highlight-green">2.20x</td>
+                            <td class="text-right">—</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="font-size:11px; color:#5e6f8d; margin-top:6px; text-align:right;">
+                    * 其他进线 = 主要为未归类自然流量。
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+                <div style="background:#f8faff; border-radius:12px; padding:14px 18px; border-left:4px solid #2a6b9c;">
+                    <div style="font-weight:600; color:#2a6b9c;"><i class="fas fa-chart-pie"></i> 广告费分布</div>
+                    <div style="font-size:13px; margin-top:4px;">
+                        富国岛 <strong>70.1%</strong> (¥34,994) · 中亚 <strong>13.5%</strong> (¥6,757)<br>
+                        马尔代夫 <strong>11.9%</strong> (¥5,951) · 斯里兰卡 <strong>4.3%</strong> (¥2,131) · 格鲁吉亚 <strong>0.1%</strong> (¥56)
+                    </div>
+                </div>
+                <div style="background:#f8faff; border-radius:12px; padding:14px 18px; border-left:4px solid #0d7c3f;">
+                    <div style="font-weight:600; color:#0d7c3f;"><i class="fas fa-hand-holding-usd"></i> 毛利贡献</div>
+                    <div style="font-size:13px; margin-top:4px;">
+                        富国岛 <strong>47.6%</strong> (¥52,283) · 中亚 <strong>15.4%</strong> (¥16,900)<br>
+                        斯里兰卡 <strong>11.8%</strong> (¥13,000) · 马尔代夫 <strong>8.8%</strong> (¥9,713) · 其他 <strong>11.5%</strong> (¥12,580)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 目的地优势分析 + 改进建议 -->
+        <!-- ============================================================ -->
+        <div class="row-two">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-star" style="color:#d9822b;"></i> 目的地优势分析</div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="background:#f0faf5; border-radius:12px; padding:14px 18px; border-left:4px solid #0d7c3f;">
+                        <div style="font-weight:700; color:#0d7c3f;"><i class="fas fa-umbrella-beach"></i> 富国岛 · 基本盘稳固</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            <strong>优势：</strong> 广告费占比 70.1%，贡献 47.6% 毛利，进线成本仅 ¥10.95。
+                            作为包机专线主力，<strong>规模效应明显</strong>，成本持续优化。
+                            <br><span style="color:#0d7c3f;">✅ 基本盘稳固，是毛利贡献的压舱石。</span>
+                        </div>
+                    </div>
+                    <div style="background:#fefaf5; border-radius:12px; padding:14px 18px; border-left:4px solid #d9822b;">
+                        <div style="font-weight:700; color:#d9822b;"><i class="fas fa-landmark"></i> 斯里兰卡 · ROI 极高</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            <strong>优势：</strong> ROI 高达 <strong>6.10x</strong>，收客转化率 <strong>9.34%</strong> (17/182)。
+                            广告费仅占 4.3%，却贡献 11.8% 毛利，<strong>流量精准度高，客群匹配度极好</strong>。
+                            <br><span style="color:#d9822b;">✅ 极具放量潜力的高回报目的地。</span>
+                        </div>
+                    </div>
+                    <div style="background:#f0f6fe; border-radius:12px; padding:14px 18px; border-left:4px solid #1a5c8c;">
+                        <div style="font-weight:700; color:#1a5c8c;"><i class="fas fa-water"></i> 马尔代夫 · 低成本高毛利</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            <strong>优势：</strong> 广告费 ¥5,951，进线 557 条（进线成本仅 ¥10.68），ROI 1.63x。
+                            自然流量与付费流量结合良好，<strong>品牌心智强，用户主动搜索意愿高</strong>。
+                            <br><span style="color:#1a5c8c;">✅ 付费测试成功，可适度放量。</span>
+                        </div>
+                    </div>
+                    <div style="background:#f0faf5; border-radius:12px; padding:14px 18px; border-left:4px solid #a67c1e;">
+                        <div style="font-weight:700; color:#a67c1e;"><i class="fas fa-mountain"></i> 中亚 · ROI 冠军</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            <strong>优势：</strong> ROI <strong>2.50x</strong> 为全场最高（除格鲁吉亚），收客转化率 <strong>4.93%</strong> (24/487)。
+                            广告费占比 13.5%，贡献 15.4% 毛利，<strong>投入产出效率稳定且高效</strong>。
+                            <br><span style="color:#a67c1e;">✅ 具备持续放量潜力的高转化目的地。</span>
+                        </div>
+                    </div>
+                    <div style="background:#fefaf5; border-radius:12px; padding:14px 18px; border-left:4px solid #8a6d3b;">
+                        <div style="font-weight:700; color:#8a6d3b;"><i class="fas fa-church"></i> 格鲁吉亚 · 新目的地测试爆发</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            <strong>优势：</strong> 测试期消耗 ¥56，ROI 高达 <strong>94.6x</strong>，展现惊人潜力。
+                            虽进线与订单数据未完全归因，但<strong>ROI 表现预示该目的地具备极高的转化价值</strong>。
+                            <br><span style="color:#8a6d3b;">✅ 可作为储备目的地重点培育，加速验证转化链路。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-lightbulb" style="color:#d9822b;"></i> 改进建议 <span class="title-badge red">优先级</span></div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="background:#fce9e9; border-radius:12px; padding:14px 18px; border-left:4px solid #bc4b4b;">
+                        <div style="font-weight:700; color:#8a1a1a;"><i class="fas fa-triangle-exclamation"></i> 优先级 S · 订单转化率提升</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            8月订单数下降 21.1%，收客人数下降 45.3%。<strong>从留资到订单的转化链路出现严重断层</strong>。
+                            <br><span style="color:#8a1a1a; font-weight:700;">行动：</span> 销售话术库 3.0 迭代（分目的地/分场景），强化促单与逼单话术；销售分岗精细化运营（高客单价线与新目的地线分离）；设置爆量预警与超时响应机制。
+                            <br><span style="color:#0d7c3f;">目标：</span> 订单核销率 → 2.5%+，人数核销率 → 6.0%+。
+                        </div>
+                    </div>
+                    <div style="background:#fef4d9; border-radius:12px; padding:14px 18px; border-left:4px solid #d9822b;">
+                        <div style="font-weight:700; color:#a67c1e;"><i class="fas fa-expand"></i> 优先级 A · 高 ROI 目的地扩量</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            <strong>斯里兰卡</strong> (ROI 6.10x) 和 <strong>中亚</strong> (ROI 2.50x) 展现出极高的投入产出效率。
+                            目前两者广告费合计占 17.8%，<strong>具备大幅放量空间</strong>。
+                            <br><span style="color:#a67c1e; font-weight:700;">行动：</span> 斯里兰卡预算从 ¥2,131 → ¥8,000~10,000；中亚预算从 ¥6,757 → ¥15,000~20,000。
+                            <br><span style="color:#0d7c3f;">目标：</span> 保持 ROI ≥ 5x (斯里兰卡) 与 ≥ 2.0x (中亚)。
+                        </div>
+                    </div>
+                    <div style="background:#eaf7f0; border-radius:12px; padding:14px 18px; border-left:4px solid #0d7c3f;">
+                        <div style="font-weight:700; color:#0d7c3f;"><i class="fas fa-leaf"></i> 优先级 B · 马尔代夫稳健放量</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            马尔代夫 ROI 1.63x，进线成本仅 ¥10.68，<strong>流量效率极高</strong>。
+                            广告费占比 11.9%，贡献 8.8% 毛利，已验证付费模型。
+                            <br><span style="color:#0d7c3f; font-weight:700;">行动：</span> 预算从 ¥5,951 → ¥10,000~12,000，保持 ROI ≥ 1.5x。
+                        </div>
+                    </div>
+                    <div style="background:#f0f6fe; border-radius:12px; padding:14px 18px; border-left:4px solid #1a5c8c;">
+                        <div style="font-weight:700; color:#1a5c8c;"><i class="fas fa-clock"></i> 优先级 C · 承接能力扩容与数据基建</div>
+                        <div style="font-size:13px; color:#1d2d44; margin-top:4px;">
+                            8月多次出现响应时长飙升至 15~30 分钟，30 秒回复率波动剧烈（40%~80%）。
+                            <strong>流量放大后承接断裂</strong>，直接影响留资到订单的转化。
+                            <br><span style="color:#1a5c8c; font-weight:700;">行动：</span> 完善全链路数据看板，精准定位“漏损”环节（开口→留资→订单）；强化爆量预警机制，确保人力弹性。
+                            <br><span style="color:#1a5c8c;">目标：</span> 30 秒回复率 → 75%+，均响应时长 < 3 分钟。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 抖音搜索指数 (单独列表) -->
+        <!-- ============================================================ -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-chart-simple" style="color:#d9822b;"></i> 抖音关键词搜索指数 <span class="title-badge orange">2026年7-8月</span></div>
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>日期</th><th>目的地</th><th>同比变化</th><th>环比变化</th><th>搜索均值 (万)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background:#fef8ee; font-weight:600;">
+                            <td><strong>2026-07-30</strong></td>
+                            <td><span style="color:#d9822b;">🔥 帕劳</span></td>
+                            <td class="highlight-green"><strong>+252.10%</strong></td>
+                            <td class="highlight-green"><strong>+50.73%</strong></td>
+                            <td><strong>5.0</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2026-08-03</td>
+                            <td>马尔代夫</td>
+                            <td>+18.64%</td>
+                            <td>+1.60%</td>
+                            <td>15.0</td>
+                        </tr>
+                        <tr>
+                            <td>2026-08-07</td>
+                            <td>富国岛</td>
+                            <td>+131.76%</td>
+                            <td class="highlight-red">-14.86%</td>
+                            <td>2.1</td>
+                        </tr>
+                        <tr>
+                            <td>2026-08-11</td>
+                            <td>马尔代夫</td>
+                            <td>+131.76%</td>
+                            <td class="highlight-red">-14.86%</td>
+                            <td>2.1</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="font-size:11px; color:#5e6f8d; text-align:center; padding-top:12px;">
+                                <i class="fas fa-info-circle"></i> 数据来源：抖音关键词搜索指数 · 帕劳搜索热度呈现爆发式增长，同比 +252.10%，环比 +50.73%，远超市占主力富国岛（2.1 万）与马尔代夫（15 万）。
+                                <br><span style="color:#d9822b; font-weight:600;">🚀 建议：</span> 立即启动帕劳供应链调研与产品设计，抢占目的地红利窗口期。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 9月运营计划 (基于8月分析) -->
+        <!-- ============================================================ -->
+        <div class="card" style="border: 2px solid #d4c5f9; background: #fcfaff;">
+            <div class="card-title" style="border-bottom-color: #d4c5f9;">
+                <i class="fas fa-calendar-plus" style="color:#5e3a8c;"></i> 9月运营计划 · 五大攻坚方向
+                <span class="title-badge purple">执行纲领</span>
+            </div>
+
+            <div class="plan-grid">
+                <!-- 1. 订单转化率提升 -->
+                <div class="plan-item priority-s">
+                    <div class="plan-title">
+                        <i class="fas fa-chart-line" style="color:#8a1a1a;"></i> 订单转化率提升与销售赋能
+                        <span class="badge s">S级</span>
+                    </div>
+                    <div class="plan-detail">
+                        <ul>
+                            <li><strong>话术库 3.0：</strong> 基于 8 月留资与订单数据，迭代分目的地话术模型，强化促单与逼单话术，9月10日前上线。</li>
+                            <li><strong>销售分岗：</strong> 设立“高客单价专线”（中亚、斯里兰卡、格鲁吉亚）与“大众专线”（富国岛、马尔代夫），提升转化专业度。</li>
+                            <li><strong>爆量预警：</strong> 完善单小时进线超阈值自动加派人力机制，确保承接弹性，降低响应时长。</li>
+                        </ul>
+                    </div>
+                    <div class="plan-meta">
+                        <span><span class="label">🎯 目标：</span>订单核销率 ≥ 2.5%，人数核销率 ≥ 6.0%</span>
+                        <span><span class="label">⏱ 节点：</span>话术库 9.10 · 分岗 9.5</span>
+                        <span><span class="label">👤 责任：</span>运营 + 销售 + 数据</span>
+                    </div>
+                </div>
+
+                <!-- 2. 高 ROI 目的地预算加码 -->
+                <div class="plan-item priority-a">
+                    <div class="plan-title">
+                        <i class="fas fa-rocket" style="color:#a67c1e;"></i> 高 ROI 目的地预算加码
+                        <span class="badge a">A级</span>
+                    </div>
+                    <div class="plan-detail">
+                        <ul>
+                            <li><strong>斯里兰卡：</strong> 预算从 ¥2,131 → ¥10,000，测试“亲子+自然”与“文化探索”内容方向，目标 ROI ≥ 5x。</li>
+                            <li><strong>中亚：</strong> 预算从 ¥6,757 → ¥18,000，定向优化“轻探险+人文”客群，保持 ROI ≥ 2.0x。</li>
+                            <li><strong>格鲁吉亚：</strong> 追加预算至 ¥2,000，快速验证转化模型，目标 ROI ≥ 10x。</li>
+                        </ul>
+                    </div>
+                    <div class="plan-meta">
+                        <span><span class="label">🎯 目标：</span>高 ROI 目的地广告费占比 ≥ 25%，整体 ROI ≥ 2.5x</span>
+                        <span><span class="label">⏱ 节点：</span>预算调整 9.3 生效 · 周复盘</span>
+                        <span><span class="label">👤 责任：</span>投放 + 产品</span>
+                    </div>
+                </div>
+
+                <!-- 3. 小程序 + 小红书电商店铺 -->
+                <div class="plan-item priority-b">
+                    <div class="plan-title">
+                        <i class="fas fa-mobile-alt" style="color:#0d7c3f;"></i> 小程序 &amp; 小红书电商店铺
+                        <span class="badge b">B级</span>
+                    </div>
+                    <div class="plan-detail">
+                        <ul>
+                            <li><strong>小程序：</strong> 完成核心功能（攻略、定制、客服、会员）迭代，9月底正式推广，作为私域沉淀与复购阵地。</li>
+                            <li><strong>小红书店铺：</strong> 专项更新产品价格，独立运营店铺页面，优化商品详情与转化链路，承接高质量搜索流量。</li>
+                        </ul>
+                    </div>
+                    <div class="plan-meta">
+                        <span><span class="label">🎯 目标：</span>小程序月活 ≥ 5k，店铺 GMV ≥ ¥20w</span>
+                        <span><span class="label">⏱ 节点：</span>9.20 功能上线 · 店铺 9.10 更新</span>
+                        <span><span class="label">👤 责任：</span>产品 + 运营 + 电商</span>
+                    </div>
+                </div>
+
+                <!-- 4. 帕劳 + 新目的地机会 -->
+                <div class="plan-item priority-s">
+                    <div class="plan-title">
+                        <i class="fas fa-globe-asia" style="color:#8a1a1a;"></i> 帕劳可行性调研 &amp; 新目的地测试
+                        <span class="badge s">S级</span>
+                    </div>
+                    <div class="plan-detail">
+                        <ul>
+                            <li><strong>帕劳：</strong> 9月15日前完成地接、酒店、航班资源摸底，评估供应链可行性。若可行，9月底上线测试产品。</li>
+                            <li><strong>埃及：</strong> 小红书大盘数据显示埃及 CTR 9.43%~13.18%，留资成本 98~138 元，关注其潜力。</li>
+                        </ul>
+                    </div>
+                    <div class="plan-meta">
+                        <span><span class="label">🎯 目标：</span>帕劳可行性报告 9.15 · 测试产品 9.30</span>
+                        <span><span class="label">👤 责任：</span>产品 + 供应链 + 投放</span>
+                    </div>
+                </div>
+
+                <!-- 5. 品牌 UGC 声量 + 视频号矩阵 -->
+                <div class="plan-item priority-c" style="grid-column: 1 / -1;">
+                    <div class="plan-title">
+                        <i class="fas fa-users" style="color:#1a5c8c;"></i> 品牌 UGC 声量 &amp; 视频号矩阵
+                        <span class="badge c">C级</span>
+                    </div>
+                    <div class="plan-detail" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <strong>📱 UGC 好评：</strong>
+                            <ul>
+                                <li>发起“HIGo旅行故事”征集，目标积累 <strong>100+ 真实好评</strong>，在小红书/小程序形成口碑矩阵。</li>
+                                <li>优质内容二次传播，引流小程序，提升品牌信任度。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>🎬 视频号矩阵：</strong>
+                            <ul>
+                                <li>建立品牌人设号（创始人/旅行达人），输出高价值内容，打通“短视频→直播→私信”商业流。</li>
+                                <li>测试投流模型，跑通从内容到成交的完整闭环。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="plan-meta" style="margin-top:12px;">
+                        <span><span class="label">🎯 目标：</span>100+ 好评 · 视频号商业流跑通</span>
+                        <span><span class="label">⏱ 节点：</span>UGC 9.30 · 视频号 9.25</span>
+                        <span><span class="label">👤 责任：</span>品牌 + 新媒体</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:16px; background:#ede7f6; border-radius:12px; padding:14px 20px; border-left:4px solid #5e3a8c;">
+                <i class="fas fa-bullseye" style="color:#5e3a8c;"></i>
+                <strong style="color:#3a1f6e;">9月核心战役：</strong>
+                以 <strong>“订单转化率提升”</strong> 与 <strong>“高 ROI 目的地放量”</strong> 为双引擎，
+                同步推进 <strong>“帕劳新目的地”</strong> 抢占红利，<strong>“小程序与小红书店铺”</strong> 构建品牌壁垒，
+                实现从“流量效率”到“转化质量”与“品牌资产”的跨越。
+                <span style="display:block; font-size:13px; color:#5e3a8c; margin-top:4px;">
+                    ⚡ 关键杠杆：销售赋能 · 数据驱动 · 敏捷测试新目的地
+                </span>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 核心结论 -->
+        <!-- ============================================================ -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-flag-checkered" style="color:#1a5c8c;"></i> 8 月核心结论</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; font-size:14px;">
+                <div style="background:#f8faff; padding:16px; border-radius:14px;">
+                    <div style="font-weight:700; color:#0d7c3f;"><i class="fas fa-arrow-up"></i> 留资端显著改善</div>
+                    <div style="color:#3d4f6a; margin-top:4px; line-height:1.6; font-size:13px;">
+                        留资数 ↑4.6%，留资率 ↑2.88pp<br>
+                        自然进线占比 40% 节省 ¥33,272<br>
+                        成本端全面碾压大盘
+                    </div>
+                </div>
+                <div style="background:#fce9e9; padding:16px; border-radius:14px; border:1px solid #f5c2c2;">
+                    <div style="font-weight:700; color:#8a1a1a;"><i class="fas fa-triangle-exclamation"></i> 订单转化严重下滑</div>
+                    <div style="color:#3d4f6a; margin-top:4px; line-height:1.6; font-size:13px;">
+                        订单数 ↓21.1%，收客人数 ↓45.3%<br>
+                        订单核销率 1.75% (↓0.45pp)<br>
+                        人数核销率 4.91% (↓3.99pp)
+                    </div>
+                </div>
+                <div style="background:#fefaf5; padding:16px; border-radius:14px; border:1px solid #f5d9b3;">
+                    <div style="font-weight:700; color:#d9822b;"><i class="fas fa-rocket"></i> 高 ROI 目的地与帕劳机会</div>
+                    <div style="color:#3d4f6a; margin-top:4px; line-height:1.6; font-size:13px;">
+                        斯里兰卡 ROI 6.10x · 中亚 ROI 2.50x<br>
+                        格鲁吉亚测试 ROI 94.6x<br>
+                        帕劳搜索指数同比 +252%，环比 +50.73%
+                    </div>
+                </div>
+            </div>
+            <div class="conclusion-box" style="margin-top:18px;">
+                <i class="fas fa-gavel" style="margin-right:10px;"></i>
+                <strong>一句话总结：</strong> 8 月留资端表现亮眼（留资数 +4.6%，留资率 +2.88pp），成本端继续碾压大盘，自然进线节省超 ¥3.3 万。<br>
+                <span class="green-text">斯里兰卡、中亚、格鲁吉亚构成高 ROI 增长极，帕劳搜索暴涨带来新机会，</span><br>
+                <span class="danger-text">但订单转化出现严重下滑（订单-21.1%，收客-45.3%），</span>
+                说明 <span class="danger-text">前端流量效率提升的同时，后端销售承接与促单能力成为核心瓶颈。</span><br>
+                <span class="green-text">9 月必须将“订单转化率提升”与“高 ROI 目的地放量”作为核心战役，同时抢抓帕劳红利。</span>
+            </div>
+            <div class="flex-between" style="margin-top:16px; font-size:13px; background:#f7faff; padding:12px 18px; border-radius:12px;">
+                <span><i class="fas fa-check-circle" style="color:#0d7c3f;"></i> ✅ 已落地：周末排班 · 分岗处理试点 · 话术库2.0</span>
+                <span><i class="fas fa-clock" style="color:#a67c1e;"></i> ⏳ 进行中：爆量预警 · 全链路数据看板</span>
+                <span><i class="fas fa-bullseye" style="color:#1a5c8c;"></i> 🎯 9月目标：订单核销率 ≥ 2.5%，整体 ROI ≥ 2.5x，帕劳产品上线</span>
+            </div>
+            <div style="margin-top:14px; background:#fce9e9; padding:12px 18px; border-radius:10px; border:1px solid #f5c2c2;">
+                <i class="fas fa-exclamation-triangle" style="color:#8a1a1a;"></i>
+                <strong style="color:#8a1a1a;">订单转化问题的严重性：</strong>
+                留资数增长 4.6% 而订单数下降 21.1%，意味着 <strong>留资到订单的转化率从 5.7% 降至 4.3%</strong>（1,306 留资 → 56 订单）。
+                按 8 月留资数计算，转化率每提升 1 个百分点，可多产生 13 个订单。销售承接与促单能力成为制约营收增长的最大瓶颈。
+                <span style="color:#8a1a1a; font-weight:700;">必须将话术库迭代与销售分岗作为 9 月最高优先级。</span>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- FOOTER -->
+        <!-- ============================================================ -->
+        <div class="footer">
+            HIGo 运营团队 · 数据截止 2026.8.31 · 汇报人：新媒体运营部
+        </div>
+
+    </div>
+</body>
+</html>
